@@ -1,6 +1,31 @@
-> **Note**
-> This static archive described version 0.5.0 of PyVRP, the version that was submitted to INFORMS Journal on Computing.
-> Continued development on PyVRP takes place in [the PyVRP repository](https://github.com/PyVRP/PyVRP/), not here!
+[![INFORMS Journal on Computing Logo](https://INFORMSJoC.github.io/logos/INFORMS_Journal_on_Computing_Header.jpg)](https://pubsonline.informs.org/journal/ijoc)
+
+# PyVRP: a high-performance VRP solver package
+
+This archive is distributed in association with the [INFORMS Journal on Computing](https://pubsonline.informs.org/journal/ijoc) under the [MIT License](LICENSE).
+
+The software and data in this repository are a snapshot of the software and data  that were used in the research reported on in the paper [PyVRP: a high-performance VRP solver package](https://doi.org/10.1287/ijoc.2023.0055) by Niels A. Wouda, Leon Lan, and Wouter Kool.
+
+## Cite
+
+To cite the contents of this repository, please cite both the paper and this repo, using their respective DOIs.
+
+https://doi.org/10.1287/ijoc.2023.0055
+
+https://doi.org/10.1287/ijoc.2023.0055.cd
+
+Below is the BibTex for citing this snapshot of the respoitory.
+
+```
+@article{wouda2023pyvrp,
+  author =        {Wouda, Niels A. and Lan, Leon and Kool, Wouter},
+  publisher =     {INFORMS Journal on Computing},
+  title =         {PyVRP: a high-performance VRP solver package},
+  year =          {2023},
+  doi =           {10.1287/ijoc.2023.0055.cd},
+  url =           {https://github.com/INFORMSJoC/2023.0055},
+}  
+```
 
 ---
 
