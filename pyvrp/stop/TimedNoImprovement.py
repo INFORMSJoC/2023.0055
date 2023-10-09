@@ -1,3 +1,8 @@
+# MIT License
+# 
+# Copyright (c) 2020, Thibaut Vidal (HGS-CVRP)
+# Copyright (c) 2022, ORTEC (HGS-DIMACS)
+# Copyright (c) since 2022, PyVRP contributors
 from .MaxRuntime import MaxRuntime
 from .NoImprovement import NoImprovement
 

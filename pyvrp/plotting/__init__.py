@@ -1,3 +1,8 @@
+# MIT License
+# 
+# Copyright (c) 2020, Thibaut Vidal (HGS-CVRP)
+# Copyright (c) 2022, ORTEC (HGS-DIMACS)
+# Copyright (c) since 2022, PyVRP contributors
 from .plot_coordinates import plot_coordinates
 from .plot_demands import plot_demands
 from .plot_diversity import plot_diversity
