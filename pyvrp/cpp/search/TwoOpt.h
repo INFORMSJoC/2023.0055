@@ -1,3 +1,10 @@
+/**
+ * MIT License
+ * 
+ * Copyright (c) 2020, Thibaut Vidal (HGS-CVRP)
+ * Copyright (c) 2022, ORTEC (HGS-DIMACS)
+ * Copyright (c) since 2022, PyVRP contributors
+ */
 #ifndef PYVRP_TWOOPT_H
 #define PYVRP_TWOOPT_H
 
