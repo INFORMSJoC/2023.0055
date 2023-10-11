@@ -1,0 +1,1327 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>Classic VRPs - PyVRP 0.5.0 documentation</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.a60204c58f5e4ff66.min.css?v=63f51f50" />
+        <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="orange" data-md-color-accent="yellow">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#The-capacitated-VRP" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="PyVRP 0.5.0 documentation" class="md-header__button md-logo" aria-label="PyVRP 0.5.0 documentation" data-md-component="logo">
+      <img src="../_static/icon.svg" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PyVRP 0.5.0 documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Classic VRPs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="orange" data-md-color-accent="yellow"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="orange" data-md-color-accent="yellow"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/PyVRP/PyVRP/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    PyVRP
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="PyVRP 0.5.0 documentation" class="md-nav__button md-logo" aria-label="PyVRP 0.5.0 documentation" data-md-component="logo">
+      <img src="../_static/icon.svg" alt="logo">
+    </a>
+    PyVRP 0.5.0 documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/PyVRP/PyVRP/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    PyVRP
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          <span class="md-ellipsis">Getting started</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Getting started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Getting started</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/introduction_to_vrp.html" class="md-nav__link">
+        <span title="/setup/introduction_to_vrp.rst (reference label)" class="md-ellipsis">A brief introduction to VRP</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/introduction_to_hgs.html" class="md-nav__link">
+        <span title="/setup/introduction_to_hgs.rst (reference label)" class="md-ellipsis">A brief introduction to HGS</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="quick_tutorial.html" class="md-nav__link">
+        <span title="/examples/quick_tutorial.ipynb (reference label)" class="md-ellipsis">A quick tutorial</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/installation.html" class="md-nav__link">
+        <span title="/setup/installation.rst (reference label)" class="md-ellipsis">Installation instructions</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/getting_help.html" class="md-nav__link">
+        <span title="/setup/getting_help.rst (reference label)" class="md-ellipsis">Getting help</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/benchmarks.html" class="md-nav__link">
+        <span title="/setup/benchmarks.rst (reference label)" class="md-ellipsis">Benchmarks</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          <span class="md-ellipsis">Examples</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Examples" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Examples</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/examples/basic_vrps.ipynb (reference label)" class="md-ellipsis">Classic VRPs</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/examples/basic_vrps.ipynb (reference label)" class="md-ellipsis">Classic VRPs</span>
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#The-capacitated-VRP" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#the-capacitated-vrp (reference label)" class="md-ellipsis">The capacitated VRP</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The capacitated VRP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Reading-the-instance" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#reading-the-instance (reference label)" class="md-ellipsis">Reading the instance</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Solving-the-instance" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#solving-the-instance (reference label)" class="md-ellipsis">Solving the instance</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#The-VRP-with-time-windows" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#the-vrp-with-time-windows (reference label)" class="md-ellipsis">The VRP with time windows</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The VRP with time windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#id1" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#id1 (reference label)" class="md-ellipsis">Reading the instance</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id2" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#id2 (reference label)" class="md-ellipsis">Solving the instance</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Solving-a-larger-VRPTW-instance" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#solving-a-larger-vrptw-instance (reference label)" class="md-ellipsis">Solving a larger VRPTW instance</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Conclusion" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#conclusion (reference label)" class="md-ellipsis">Conclusion</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="using_pyvrp_components.html" class="md-nav__link">
+        <span title="/examples/using_pyvrp_components.ipynb (reference label)" class="md-ellipsis">Using Py<wbr>VRP’s components</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          <span class="md-ellipsis">API reference</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">API reference</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/pyvrp.html" class="md-nav__link">
+        <span title="/api/pyvrp.rst (reference label)" class="md-ellipsis">Py<wbr>VRP</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/crossover.html" class="md-nav__link">
+        <span title="/api/crossover.rst (reference label)" class="md-ellipsis">Crossover operators</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/diversity.html" class="md-nav__link">
+        <span title="/api/diversity.rst (reference label)" class="md-ellipsis">Diversity measures</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/search.html" class="md-nav__link">
+        <span title="/api/search.rst (reference label)" class="md-ellipsis">Search</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/plotting.html" class="md-nav__link">
+        <span title="/api/plotting.rst (reference label)" class="md-ellipsis">Plotting tools</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/stop.html" class="md-nav__link">
+        <span title="/api/stop.rst (reference label)" class="md-ellipsis">Stopping criteria</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          <span class="md-ellipsis">Developing Py<wbr>VRP</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developing PyVRP" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Developing Py<wbr>VRP</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dev/contributing.html" class="md-nav__link">
+        <span title="/dev/contributing.rst (reference label)" class="md-ellipsis">Contributing</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dev/benchmarking.html" class="md-nav__link">
+        <span title="/dev/benchmarking.rst (reference label)" class="md-ellipsis">Benchmarking</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#The-capacitated-VRP" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#the-capacitated-vrp (reference label)" class="md-ellipsis">The capacitated VRP</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The capacitated VRP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Reading-the-instance" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#reading-the-instance (reference label)" class="md-ellipsis">Reading the instance</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Solving-the-instance" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#solving-the-instance (reference label)" class="md-ellipsis">Solving the instance</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#The-VRP-with-time-windows" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#the-vrp-with-time-windows (reference label)" class="md-ellipsis">The VRP with time windows</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The VRP with time windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#id1" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#id1 (reference label)" class="md-ellipsis">Reading the instance</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id2" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#id2 (reference label)" class="md-ellipsis">Solving the instance</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Solving-a-larger-VRPTW-instance" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#solving-a-larger-vrptw-instance (reference label)" class="md-ellipsis">Solving a larger VRPTW instance</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Conclusion" class="md-nav__link">
+    <span title="/examples/basic_vrps.ipynb#conclusion (reference label)" class="md-ellipsis">Conclusion</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<h1 id="Classic-VRPs">Classic VRPs<a class="headerlink" href="#Classic-VRPs" title="Permalink to this heading">¶</a></h1>
+<p>This notebook shows how to use PyVRP to solve two classic variants of the VRP: the capacitated vehicle routing problem (CVRP), and the vehicle routing problem with time windows (VRPTW). It builds on the tutorial by solving much larger instances, and going into more detail about the various plotting tools and diagnostics available in PyVRP.</p>
+<p>A CVRP instance is defined on a complete graph <span class="math notranslate nohighlight">\(G=(V,A)\)</span>, where <span class="math notranslate nohighlight">\(V\)</span> is the vertex set and <span class="math notranslate nohighlight">\(A\)</span> is the arc set. The vertex set <span class="math notranslate nohighlight">\(V\)</span> is partitioned into <span class="math notranslate nohighlight">\(V=\{0\} \cup V_c\)</span>, where <span class="math notranslate nohighlight">\(0\)</span> represents the depot and <span class="math notranslate nohighlight">\(V_c=\{1, \dots, n\}\)</span> denotes the set of <span class="math notranslate nohighlight">\(n\)</span> customers. Each arc <span class="math notranslate nohighlight">\((i, j) \in A\)</span> has a weight <span class="math notranslate nohighlight">\(d_{ij} \ge 0\)</span> that represents the travel distance from <span class="math notranslate nohighlight">\(i \in V\)</span> to <span class="math notranslate nohighlight">\(j \in V\)</span>. Each customer <span class="math notranslate nohighlight">\(i \in V_c\)</span> has a demand
+<span class="math notranslate nohighlight">\(q_{i} \ge 0\)</span>. The objective is to find a feasible solution that minimises the total distance.</p>
+<p>A VRPTW instance additionally incorporates time aspects into the problem. For the sake of exposition we assume the travel duration <span class="math notranslate nohighlight">\(t_{ij} \ge 0\)</span> is equal to the travel distance <span class="math notranslate nohighlight">\(d_{ij}\)</span> in this notebook. Each customer <span class="math notranslate nohighlight">\(i \in V_c\)</span> has a service time <span class="math notranslate nohighlight">\(s_{i} \ge 0\)</span> and a (hard) time window <span class="math notranslate nohighlight">\(\left[e_i, l_i\right]\)</span> that denotes the earliest and latest time that service can start. A vehicle is allowed to arrive at a customer location before the beginning of the time
+window, but it must wait for the window to open to start the delivery. Each vehicle must return to the depot before the end of the depot time window <span class="math notranslate nohighlight">\(H\)</span>. The objective is to find a feasible solution that minimises the total distance.</p>
+<p>Let’s first import what we will use in this notebook.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[1]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+<span class="kn">from</span> <span class="nn">vrplib</span> <span class="kn">import</span> <span class="n">read_solution</span>
+
+<span class="kn">from</span> <span class="nn">pyvrp</span> <span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">read</span>
+<span class="kn">from</span> <span class="nn">pyvrp.plotting</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">plot_coordinates</span><span class="p">,</span>
+    <span class="n">plot_instance</span><span class="p">,</span>
+    <span class="n">plot_result</span><span class="p">,</span>
+    <span class="n">plot_route_schedule</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pyvrp.stop</span> <span class="kn">import</span> <span class="n">MaxIterations</span><span class="p">,</span> <span class="n">MaxRuntime</span>
+</code></pre></div>
+</div>
+</div>
+<h2 id="The-capacitated-VRP">The capacitated VRP<a class="headerlink" href="#The-capacitated-VRP" title="Permalink to this heading">¶</a></h2>
+<h3 id="Reading-the-instance">Reading the instance<a class="headerlink" href="#Reading-the-instance" title="Permalink to this heading">¶</a></h3>
+<p>We will solve the <code class="docutils literal notranslate"><span class="pre">X-n439-k37</span></code> instance, which is part of the <a class="reference external" href="http://vrp.atd-lab.inf.puc-rio.br/index.php/en/new-instances">X instance set</a> that is widely used to benchmark CVRP algorithms. The function <code class="docutils literal notranslate"><span class="pre">pyvrp.read</span></code> reads the instance file and converts it to a <code class="docutils literal notranslate"><span class="pre">ProblemData</span></code> instance. We pass the argument <code class="docutils literal notranslate"><span class="pre">round_func=&quot;round&quot;</span></code> to compute the Euclidean distances rounded to the nearest integral, which is the convention for the X benchmark set. We also load the best known solution to
+evaluate our solver later on.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[2]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">INSTANCE</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s2">&quot;data/X-n439-k37.vrp&quot;</span><span class="p">,</span> <span class="n">round_func</span><span class="o">=</span><span class="s2">&quot;round&quot;</span><span class="p">)</span>
+<span class="n">BKS</span> <span class="o">=</span> <span class="n">read_solution</span><span class="p">(</span><span class="s2">&quot;data/X-n439-k37.sol&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<p>Let’s plot the instance and see what we have.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[3]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plot_coordinates</span><span class="p">(</span><span class="n">INSTANCE</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_basic_vrps_6_0.png" src="../_images/examples_basic_vrps_6_0.png" />
+</div>
+</div>
+<h3 id="Solving-the-instance">Solving the instance<a class="headerlink" href="#Solving-the-instance" title="Permalink to this heading">¶</a></h3>
+<p>We will again use the <code class="docutils literal notranslate"><span class="pre">Model</span></code> interface to solve the instance. The <code class="docutils literal notranslate"><span class="pre">Model</span></code> interface supports a convenient <code class="docutils literal notranslate"><span class="pre">from_data</span></code> method that can be used to instantiate a model from a known <code class="docutils literal notranslate"><span class="pre">ProblemData</span></code> object.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">INSTANCE</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">stop</span><span class="o">=</span><span class="n">MaxIterations</span><span class="p">(</span><span class="mi">2000</span><span class="p">),</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Solution results
+================
+    # routes: 37
+   # clients: 438
+   objective: 36802.00
+# iterations: 2000
+    run-time: 583.42 seconds
+
+Routes
+------
+Route #1: 217 236 105 434 311 8 2 169 3 348 260 26
+Route #2: 370 133 425 223 349 410 267 386 299 400 97 411
+Route #3: 414 326 155 92 275 41 406 270 308 202 149 172
+Route #4: 71 335 72 42 239 218 43 347 211 421 245 422
+Route #5: 281 375 296 57 392 139 200 145 122 418 206 250
+Route #6: 228 346 162 435 166 345 385 438 312 381 404 195
+Route #7: 242 241 303 110 409 388 225 86 315 352 264 372
+Route #8: 233 420 396 423 391 337 433 377 380 268 229 324
+Route #9: 193 428 293 89 17 403 384 366 416 407 412 83
+Route #10: 285 252 101 402 339 66 126 297 309 338 271 257
+Route #11: 44 243 321 413 432 351 266 329 319 289 253 383
+Route #12: 437 323 246 138 376 47 286 350 341 98 137 251
+Route #13: 79 130 80 88 173 118 91 215 153 15 159 283
+Route #14: 65 154 7 197 344 61 189 431 144 334 25 146
+Route #15: 131 6 210 22 56 75 196 116 113 274 140 1
+Route #16: 204 31 5 176 426 367 134 58 207 333
+Route #17: 387 397 62 90 109 371 390 184 395 287 361 161
+Route #18: 401 24 343 389 327 340 108 330 19 248 430 28
+Route #19: 331 220 240 408 302 255 152 177 135 157 73 175
+Route #20: 165 84 181 21 378 112 16 67 230 34 4 132
+Route #21: 265 313 13 103 117 63 74 354 209 11 244 292
+Route #22: 364 259 30 222 310 178 291 160 174 382 192 235
+Route #23: 190 125 171 394 379 301 10 37 123 64 272 328
+Route #24: 81 179 96 256 78 182 216 106 399 77 99 124
+Route #25: 332 269 120 316 114 279 213 424 300 290 368 417
+Route #26: 356 363 357 214 198 52 95 168 405 234 188 369
+Route #27: 170 183 205 150 284 320 273 224 282 219 142 163
+Route #28: 151 232 336 419 304 322 374 208 141 35 39 199
+Route #29: 53 20 128 186 164 51 100 27 54 45 277 111
+Route #30: 48 12 85 148 314 306 107 180
+Route #31: 38 167 203 247 201 40 46 212 94 49 69 68
+Route #32: 50 262 261 129 191 158 29 87 102 127 119 76
+Route #33: 226 278 33 93 258 14 307 18 436 373 36 194
+Route #34: 156 427 415 398 317 276 355 429 365 359 295 358
+Route #35: 32 82 147 143 60 104 70 185 294 318 23 298
+Route #36: 231 59 136 187 362 305 238 288 55 263 9 254
+Route #37: 353 249 325 121 237 393 280 360 342 221 227 115
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[5]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">gap</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">cost</span><span class="p">()</span> <span class="o">-</span> <span class="n">BKS</span><span class="p">[</span><span class="s2">&quot;cost&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="n">BKS</span><span class="p">[</span><span class="s2">&quot;cost&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found a solution with cost: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">cost</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This is </span><span class="si">{</span><span class="n">gap</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% worse than the best known&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;solution, which is </span><span class="si">{</span><span class="n">BKS</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Found a solution with cost: 36802.
+This is 1.1% worse than the best known solution, which is 36391.
+</pre></div></div>
+</div>
+<p>We’ve managed to find a very good solution quickly!</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Result</span></code> object also contains useful statistics about the optimisation. We can now plot these statistics as well as the final solution use <code class="docutils literal notranslate"><span class="pre">plot_result</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[6]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">plot_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">INSTANCE</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_basic_vrps_11_0.png" src="../_images/examples_basic_vrps_11_0.png" />
+</div>
+</div>
+<p>PyVRP internally uses a genetic algorithm consisting of a population of feasible and infeasible solutions. These solutions are iteratively combined into new offspring solutions, that should result in increasingly better solutions. Of course, the solutions should not all be too similar: then there is little to gain from combining different solutions. The top-left <em>Diversity</em> plot tracks the average diversity of solutions in each of the feasible and infeasible solution populations. The
+<em>Objectives</em> plot gives an overview of the best and average solution quality in the current population. The bottom-left figure shows iteration runtimes in seconds. Finally, the <em>Solution</em> plot shows the best observed solution.</p>
+<h2 id="The-VRP-with-time-windows">The VRP with time windows<a class="headerlink" href="#The-VRP-with-time-windows" title="Permalink to this heading">¶</a></h2>
+<h3 id="id1">Reading the instance<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<p>We start with a basic example that loads an instance and solves it using the standard configuration used by the <code class="docutils literal notranslate"><span class="pre">Model</span></code> interface. For the basic example we use one of the well-known Solomon instances.</p>
+<p>We again use the function <code class="docutils literal notranslate"><span class="pre">pyvrp.read</span></code>. We pass the following arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">instance_format=&quot;solomon&quot;</span></code>: this parses the instance file as a Solomon formatted instance.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">round_func=&quot;trunc1&quot;</span></code>: following the <a class="reference external" href="http://dimacs.rutgers.edu/programs/challenge/vrp/">DIMACS VRP challenge</a> convention, this computes distances and durations truncated to one decimal place.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[7]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">INSTANCE</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span>
+    <span class="s2">&quot;data/RC208.vrp&quot;</span><span class="p">,</span>
+    <span class="n">instance_format</span><span class="o">=</span><span class="s2">&quot;solomon&quot;</span><span class="p">,</span>
+    <span class="n">round_func</span><span class="o">=</span><span class="s2">&quot;trunc1&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">BKS</span> <span class="o">=</span> <span class="n">read_solution</span><span class="p">(</span><span class="s2">&quot;data/RC208.sol&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<p>Let’s plot the instance and see what we have. The function <code class="docutils literal notranslate"><span class="pre">plot_instance</span></code> will plot time windows, demands and coordinates, which should give us a good impression of what the instance looks like. These plots can also be produced separately by calling the appropriate <code class="docutils literal notranslate"><span class="pre">plot_*</span></code> function: see <a class="reference external" href="https://pyvrp.readthedocs.io/en/latest/api/plotting.html">the API documentation</a> for details.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[8]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plot_instance</span><span class="p">(</span><span class="n">INSTANCE</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_basic_vrps_16_0.png" src="../_images/examples_basic_vrps_16_0.png" />
+</div>
+</div>
+<h3 id="id2">Solving the instance<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<p>We will again use the <code class="docutils literal notranslate"><span class="pre">Model</span></code> interface to solve the instance.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[9]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">INSTANCE</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">stop</span><span class="o">=</span><span class="n">MaxIterations</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Solution results
+================
+    # routes: 4
+   # clients: 100
+   objective: 7761.00
+# iterations: 1000
+    run-time: 27.48 seconds
+
+Routes
+------
+Route #1: 90 65 82 99 52 83 64 49 19 18 48 21 23 25 77 58 75 97 59 87 74 86 57 24 22 20 66
+Route #2: 94 92 95 67 62 50 34 31 29 27 26 28 30 32 33 76 89 63 85 51 84 56 91 80
+Route #3: 61 42 44 39 38 36 35 37 40 43 41 72 71 93 96 54 81
+Route #4: 69 98 88 2 6 7 79 73 78 12 14 47 17 16 15 13 9 11 10 53 60 8 46 4 45 5 3 1 70 100 55 68
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[10]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">cost</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">cost</span><span class="p">()</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="n">gap</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">cost</span> <span class="o">-</span> <span class="n">BKS</span><span class="p">[</span><span class="s2">&quot;cost&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="n">BKS</span><span class="p">[</span><span class="s2">&quot;cost&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found a solution with cost: </span><span class="si">{</span><span class="n">cost</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This is </span><span class="si">{</span><span class="n">gap</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% worse than the optimal solution,&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;which is </span><span class="si">{</span><span class="n">BKS</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Found a solution with cost: 776.1.
+This is 0.0% worse than the optimal solution, which is 776.1.
+</pre></div></div>
+</div>
+<p>We’ve managed to find the optimal solution in a few seconds!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[11]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">plot_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">INSTANCE</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_basic_vrps_21_0.png" src="../_images/examples_basic_vrps_21_0.png" />
+</div>
+</div>
+<p>We can also inspect some statistics of the different routes, such as route distance, various durations, the number of stops and total demand.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[12]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">solution</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">best</span>
+<span class="n">routes</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="n">get_routes</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;num_stops&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">route</span><span class="p">),</span>
+        <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">distance</span><span class="p">(),</span>
+        <span class="s2">&quot;service_duration&quot;</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">service_duration</span><span class="p">(),</span>
+        <span class="s2">&quot;wait_duration&quot;</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">wait_duration</span><span class="p">(),</span>
+        <span class="s2">&quot;time_warp&quot;</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">time_warp</span><span class="p">(),</span>
+        <span class="s2">&quot;demand&quot;</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">demand</span><span class="p">(),</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">route</span> <span class="ow">in</span> <span class="n">solution</span><span class="o">.</span><span class="n">get_routes</span><span class="p">()</span>
+<span class="p">]</span>
+
+<span class="n">header</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">datum</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">datum</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<span class="n">tabulate</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;html&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[12]:
+</code></pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table>
+<thead>
+<tr><th style="text-align: right;">  num_stops</th><th style="text-align: right;">  distance</th><th style="text-align: right;">  service_duration</th><th style="text-align: right;">  wait_duration</th><th style="text-align: right;">  time_warp</th><th style="text-align: right;">  demand</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: right;">         27</td><td style="text-align: right;">      2187</td><td style="text-align: right;">              2700</td><td style="text-align: right;">              0</td><td style="text-align: right;">          0</td><td style="text-align: right;">     465</td></tr>
+<tr><td style="text-align: right;">         24</td><td style="text-align: right;">      1983</td><td style="text-align: right;">              2400</td><td style="text-align: right;">              0</td><td style="text-align: right;">          0</td><td style="text-align: right;">     381</td></tr>
+<tr><td style="text-align: right;">         17</td><td style="text-align: right;">      1325</td><td style="text-align: right;">              1700</td><td style="text-align: right;">              0</td><td style="text-align: right;">          0</td><td style="text-align: right;">     286</td></tr>
+<tr><td style="text-align: right;">         32</td><td style="text-align: right;">      2266</td><td style="text-align: right;">              3200</td><td style="text-align: right;">              0</td><td style="text-align: right;">          0</td><td style="text-align: right;">     592</td></tr>
+</tbody>
+</table></div>
+</div>
+<p>We can inspect the routes in more detail using the <code class="docutils literal notranslate"><span class="pre">plot_route_schedule</span></code> function. This will plot distance on the x-axis, and time on the y-axis, separating actual travel/driving time from waiting and service time. The clients visited are plotted as grey vertical bars indicating their time windows. We can see a jump to the start of the time window in the main (earliest) time line when a vehicle arrives early at a customer and has to wait. In some cases, there is slack in the route indicated by
+a semi-transparent region on top of the earliest time line. The grey background indicates the remaining load of the truck during the route, where the (right) y-axis ends at the vehicle capacity.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[13]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">fig</span><span class="p">,</span> <span class="n">axarr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">route</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">axarr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">routes</span><span class="p">)):</span>
+    <span class="n">plot_route_schedule</span><span class="p">(</span>
+        <span class="n">INSTANCE</span><span class="p">,</span>
+        <span class="n">route</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Route </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+        <span class="n">legend</span><span class="o">=</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_basic_vrps_25_0.png" src="../_images/examples_basic_vrps_25_0.png" />
+</div>
+</div>
+<h2 id="Solving-a-larger-VRPTW-instance">Solving a larger VRPTW instance<a class="headerlink" href="#Solving-a-larger-VRPTW-instance" title="Permalink to this heading">¶</a></h2>
+<p>To show that PyVRP can also handle much larger instances, we will solve one of the largest Gehring and Homberger VRPTW benchmark instances. The selected instance - <code class="docutils literal notranslate"><span class="pre">RC2_10_5</span></code> - has 1000 clients.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[14]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">INSTANCE</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span>
+    <span class="s2">&quot;data/RC2_10_5.vrp&quot;</span><span class="p">,</span>
+    <span class="n">instance_format</span><span class="o">=</span><span class="s2">&quot;solomon&quot;</span><span class="p">,</span>
+    <span class="n">round_func</span><span class="o">=</span><span class="s2">&quot;trunc1&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">BKS</span> <span class="o">=</span> <span class="n">read_solution</span><span class="p">(</span><span class="s2">&quot;data/RC2_10_5.sol&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[15]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">plot_instance</span><span class="p">(</span><span class="n">INSTANCE</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_basic_vrps_28_0.png" src="../_images/examples_basic_vrps_28_0.png" />
+</div>
+</div>
+<p>Here, we will use a runtime-based stopping criterion: we give the solver 30 seconds to compute.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[16]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">INSTANCE</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">stop</span><span class="o">=</span><span class="n">MaxRuntime</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[17]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">cost</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">cost</span><span class="p">()</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="n">gap</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">cost</span> <span class="o">-</span> <span class="n">BKS</span><span class="p">[</span><span class="s2">&quot;cost&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="n">BKS</span><span class="p">[</span><span class="s2">&quot;cost&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found a solution with cost: </span><span class="si">{</span><span class="n">cost</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This is </span><span class="si">{</span><span class="n">gap</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% worse than the best-known solution,&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;which is </span><span class="si">{</span><span class="n">BKS</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Found a solution with cost: 30963.1.
+This is 20.0% worse than the best-known solution, which is 25797.5.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[18]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">plot_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">INSTANCE</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_basic_vrps_32_0.png" src="../_images/examples_basic_vrps_32_0.png" />
+</div>
+</div>
+<h2 id="Conclusion">Conclusion<a class="headerlink" href="#Conclusion" title="Permalink to this heading">¶</a></h2>
+<p>In this notebook, we used PyVRP’s <code class="docutils literal notranslate"><span class="pre">Model</span></code> interface to solve a CVRP instance with 438 clients to near-optimality, as well as several VRPTW instances, including a large 1000 client instance. Moreover, we demonstrated how to use the plotting tools to visualise the instance and statistics collected during the search procedure.</p>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../setup/benchmarks.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Benchmarks" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Benchmarks
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="using_pyvrp_components.html" class="md-footer__link md-footer__link--next" aria-label="Next: Using PyVRP’s components" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Using PyVRP’s components
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2022 - 2023, PyVRP contributors.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.1.1.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.top"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike", "staticVersions": [{"aliases": [], "title": "Development", "version": ""}, {"aliases": [], "title": "v0.4.4", "version": "https://pyvrp.github.io/v0.4.4"}, {"aliases": [], "title": "v0.3.0", "version": "https://pyvrp.github.io/v0.3.0"}, {"aliases": [], "title": "v0.2.1", "version": "https://pyvrp.github.io/v0.2.1"}, {"aliases": [], "title": "v0.1.0", "version": "https://pyvrp.github.io/v0.1.0"}], "versionPath": null}}</script>
+    
+      
+        <script src="../_static/sphinx_immaterial_theme.1b5b7a2d5891aec19.min.js?v=1e7b0789"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+    
+  </body>
+</html>
