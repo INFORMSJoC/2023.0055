@@ -82,7 +82,7 @@ To cite the contents of this repository, please cite both the paper and this rep
 
 Below is the BibTex for citing this snapshot of the respoitory.
 ```bibtex
-@article{CacheTest,
+@article{wouda2023pyvrp,
   author =        {Niels A. Wouda and Leon Lan and Wouter Kool},
   publisher =     {INFORMS Journal on Computing},
   title =         {{PyVRP}},
